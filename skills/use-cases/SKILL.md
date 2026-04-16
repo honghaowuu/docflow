@@ -83,22 +83,3 @@ Pass to docflow:pipeline:
 - `docs/prd.md` content as dependency
 
 **REQUIRED SUB-SKILL:** `docflow:pipeline`
-
-## Context
-
-This is the DocFlow plugin at `/Users/honghaowu/projects/docflow`. The use-cases skill is the second document skill. It has a dependency check (prd.md must be approved) before proceeding.
-
-The validate script checks:
-- `skills/use-cases/SKILL.md` exists
-- Has `name:` frontmatter
-- Description starts with "Use when"
-- Contains "REQUIRED SUB-SKILL.*docflow:pipeline"
-
-## Your Job
-
-1. Create `skills/use-cases/` directory if needed
-2. Write `skills/use-cases/SKILL.md` with the exact content above
-3. Commit: `git add skills/use-cases/ && git commit -m "feat: add docflow:use-cases document skill"`
-4. Report back
-
-Work from: `/Users/honghaowu/projects/docflow`
