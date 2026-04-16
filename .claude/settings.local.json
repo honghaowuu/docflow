@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(chmod +x *)",
+      "Bash(bash tests/validate.sh)",
+      "Bash(echo \"Exit code: $?\")",
+      "Bash(git commit *)",
+      "Bash(cat)",
+      "Bash(bash /tmp/test_script_logic.sh)",
+      "Bash(bash /home/honghaowu/project/docflow/tests/validate.sh)",
+      "Bash(awk '/^check_\\(file|contains|executable\\)/ || /^    check_\\(file|contains|executable\\)/ || /^[[:space:]]+check_\\(file|contains|executable\\)/' /home/honghaowu/project/docflow/tests/validate.sh)",
+      "Bash(git -C /home/honghaowu/project/docflow log --oneline -5)",
+      "Bash(git -C /home/honghaowu/project/docflow diff HEAD)",
+      "Bash(git *)",
+      "Bash(bash -c 'set -euo pipefail; PLUGIN_ROOT=/tmp; f\\(\\) { [ -f \"$PLUGIN_ROOT/nonexistent\" ] && echo \"exists\" || echo \"missing\"; }; f')",
+      "Bash(echo \"Exit: $?\")",
+      "Bash(bash *)",
+      "Bash(python3 -m json.tool)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(list\\(d.keys\\(\\)\\)\\); o=d.get\\('hookSpecificOutput',{}\\); print\\(list\\(o.keys\\(\\)\\)\\); print\\('eventName:', o.get\\('hookEventName'\\)\\)\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(repr\\(d['hookSpecificOutput']['additionalContext'][:120]\\)\\)\")",
+      "Bash(python3 *)",
+      "Bash(bash /home/honghaowu/project/docflow/hooks/session-start)",
+      "Bash(echo \"exit code: $?\")",
+      "Bash(mkdir -p /tmp/docflow-test/.docflow)",
+      "Bash(echo \"version: 1\")",
+      "Bash(rm -rf /tmp/docflow-test)"
+    ]
+  },
+  "enabledPlugins": {
+    "superpowers@claude-plugins-official": true
+  }
+}

@@ -1125,7 +1125,7 @@ Expected output:
   PASS: hooks.json: has SessionStart event
   PASS: hooks.json: references session-start script
 
-=== Results: 33 passed, 0 failed ===
+=== Results: 37 passed, 0 failed ===
 ```
 
 If any check fails, fix the issue before proceeding.
