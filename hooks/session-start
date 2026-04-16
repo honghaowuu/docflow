@@ -32,9 +32,12 @@ if [ ! -f ".docflow/status.yaml" ]; then
 fi
 
 # DocFlow project detected — inject docflow:start skill
-# Use raw skill content (not pre-escaped) so emit_json handles escaping in one pass.
-start_skill=$(cat "${PLUGIN_ROOT}/skills/start/SKILL.md" 2>/dev/null \
-    || echo "Error: could not read docflow:start skill")
+if [ ! -f "${PLUGIN_ROOT}/skills/start/SKILL.md" ]; then
+    emit_json "DocFlow plugin error: skills/start/SKILL.md not found. The plugin installation may be incomplete."
+    exit 1
+fi
+
+start_skill=$(cat "${PLUGIN_ROOT}/skills/start/SKILL.md")
 
 context="<EXTREMELY_IMPORTANT>"$'\n'"You have the DocFlow plugin installed."$'\n\n'"**Below is the full content of your 'docflow:start' skill. Follow it now.**"$'\n\n'"${start_skill}"$'\n'"</EXTREMELY_IMPORTANT>"
 
