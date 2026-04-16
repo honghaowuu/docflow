@@ -44,6 +44,8 @@ git commit -m "docflow: initialize project"
 
 ## Step 2: Run Change Detection
 
+If `.docflow/status.yaml` does not exist, skip to Step 3.
+
 Read `.docflow/status.yaml`. For each document with `status: approved`:
 
 **2a. Check for upstream changes:**
@@ -64,11 +66,13 @@ outdated_because:
 
 Compute the current file hash:
 ```bash
-sha256sum docs/<doc> | cut -d' ' -f1
+shasum -a 256 docs/<doc> | cut -d' ' -f1
 ```
 
 If it differs from `content_hash` in status.yaml → warn the user:
 > "⚠ `docs/<doc>` was manually edited after its last approval. Changes may be lost if regenerated. Would you like to preserve edits or treat this as a new draft?"
+
+If the user chooses 'preserve edits': leave the file untouched and mark status as `draft` in status.yaml. If the user chooses 'new draft': proceed normally (the file will be overwritten during generation).
 
 **2c. Commit updated status if anything changed:**
 ```bash
