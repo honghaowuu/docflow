@@ -136,6 +136,5 @@ git commit -m "docflow: generate <doc>"
 
 Tell the user:
 > "`docs/<doc>` approved and committed. Run `docflow:start` to see updated project status."
-```
 
 Note: Use `shasum -a 256` (not `sha256sum`) for macOS compatibility.
