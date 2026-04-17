@@ -32,7 +32,7 @@ echo "--- Structure ---"
 check_file "hooks/hooks.json"
 check_file "hooks/session-start"
 check_file "hooks/start-context.md"
-check_file "commands/start.md"
+check_file "skills/start/SKILL.md"
 check_file "skills/pipeline/SKILL.md"
 check_file "skills/prd/SKILL.md"
 check_file "skills/use-cases/SKILL.md"
@@ -55,7 +55,7 @@ check_file "templates/test-spec.md"
 
 echo ""
 echo "--- Skill Frontmatter (CSO descriptions) ---"
-for skill in pipeline prd use-cases domain-model ux-flow ui-spec api-spec api-implement-logic test-spec repair generate-all; do
+for skill in start pipeline prd use-cases domain-model ux-flow ui-spec api-spec api-implement-logic test-spec repair generate-all; do
     check_contains "skills/$skill/SKILL.md" "^name:" "$skill: has name frontmatter"
     check_contains "skills/$skill/SKILL.md" "description: Use when" "$skill: description starts with 'Use when'"
 done

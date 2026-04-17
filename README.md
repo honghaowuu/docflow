@@ -9,7 +9,7 @@ AI-assisted documentation pipeline for Claude Code. DocFlow guides you through g
 DocFlow uses a layered architecture:
 
 1. **SessionStart hook** — Auto-loads the orchestrator context whenever a DocFlow project is detected in the working directory
-2. **`/docflow:start`** — The entry command. Triggers status check, change detection, and presents available actions. The hook has already loaded all instructions, so the command is a one-line trigger.
+2. **`/docflow:start`** — The entry skill. Triggers status check, change detection, and presents available actions. The hook has already loaded all instructions, so the skill body is a one-line trigger.
 3. **`docflow:<doc>`** — Runs guided or fast intake for a specific document, then hands off to the pipeline
 4. **`docflow:pipeline`** — Generates, annotates, collects human review, strips annotations, and commits the clean document
 
@@ -139,10 +139,9 @@ NO DOCUMENT GENERATION WITHOUT ALL DEPENDENCIES APPROVED
 ├── .claude-plugin/
 │   ├── plugin.json         # Plugin manifest
 │   └── marketplace.json    # Marketplace descriptor (enables github install)
-├── commands/
-│   └── start.md            # /docflow:start entry command
 ├── settings.json           # Default permissions granted when plugin is enabled
 ├── skills/
+│   ├── start/              # Entrypoint — triggers the session-start orchestrator
 │   ├── pipeline/           # Shared generate → review → commit pipeline
 │   ├── prd/
 │   ├── use-cases/
@@ -157,7 +156,7 @@ NO DOCUMENT GENERATION WITHOUT ALL DEPENDENCIES APPROVED
 │   ├── session-start       # SessionStart hook (detects project, injects context)
 │   └── start-context.md    # Orchestrator instructions injected by the hook
 ├── tests/
-│   └── validate.sh         # Structural validation (97 checks)
+│   └── validate.sh         # Structural validation (99 checks)
 └── .docflow/
     └── status.yaml         # Per-document approval state (created on init)
 ```
