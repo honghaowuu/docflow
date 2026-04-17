@@ -29,7 +29,9 @@
       "Bash(sed -n 42,46p /home/honghaowu/project/docflow/tests/validate.sh)",
       "Bash(sed -n 58p /home/honghaowu/project/docflow/tests/validate.sh)",
       "Bash(sed -n 105,110p /home/honghaowu/project/docflow/tests/validate.sh)",
-      "Bash(sed -n 122,124p /home/honghaowu/project/docflow/tests/validate.sh)"
+      "Bash(sed -n 122,124p /home/honghaowu/project/docflow/tests/validate.sh)",
+      "WebSearch",
+      "Bash(claude plugin *)"
     ]
   },
   "enabledPlugins": {

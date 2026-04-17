@@ -34,6 +34,7 @@ documents:
 
 3. Run:
 ```bash
+git rev-parse --is-inside-work-tree 2>/dev/null || git init
 git add .docflow/status.yaml
 git commit -m "docflow: initialize project"
 ```
