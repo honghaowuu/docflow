@@ -1,12 +1,3 @@
----
-name: docflow:start
-description: Use when starting any session in a DocFlow project — checks document status, detects change impact from git history, and presents the next available generation actions
----
-
-<SUBAGENT-STOP>
-If you were dispatched as a subagent to execute a specific task, skip this skill.
-</SUBAGENT-STOP>
-
 # DocFlow Project Orchestrator
 
 **Announce at start:** "I'm using docflow:start to check project status."

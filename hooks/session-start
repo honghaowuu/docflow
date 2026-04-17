@@ -31,13 +31,13 @@ if [ ! -f ".docflow/status.yaml" ]; then
     exit 0
 fi
 
-# DocFlow project detected — inject docflow:start skill
-if [ ! -f "${PLUGIN_ROOT}/skills/start/SKILL.md" ]; then
-    emit_json "DocFlow plugin error: skills/start/SKILL.md not found. The plugin installation may be incomplete."
+# DocFlow project detected — inject start context
+if [ ! -f "${PLUGIN_ROOT}/hooks/start-context.md" ]; then
+    emit_json "DocFlow plugin error: hooks/start-context.md not found. The plugin installation may be incomplete."
     exit 1
 fi
 
-start_skill=$(cat "${PLUGIN_ROOT}/skills/start/SKILL.md")
+start_skill=$(cat "${PLUGIN_ROOT}/hooks/start-context.md")
 
 context="<EXTREMELY_IMPORTANT>"$'\n'"You have the DocFlow plugin installed."$'\n\n'"**Below is the full content of your 'docflow:start' skill. Follow it now.**"$'\n\n'"${start_skill}"$'\n'"</EXTREMELY_IMPORTANT>"
 
