@@ -1,0 +1,32 @@
+# API Specification
+
+# == Metadata ==
+# AI Generated
+
+title: ~
+version: ~
+base_url: ~
+
+# Human Review Required
+# [ ] Confirmed
+
+# == Endpoints ==
+# AI Generated
+
+# Generate a YAML list of endpoint objects. Each object must include:
+#   id:           unique identifier (e.g. create-order)
+#   method:       HTTP method (GET, POST, PUT, DELETE, PATCH)
+#   path:         URL path (e.g. /api/v1/orders)
+#   description:  what the endpoint does
+#   auth_required: true or false
+#   request:
+#     body:       list of fields with name, type, required
+#   response:
+#     success:
+#       status:   HTTP status code
+#       body:     response shape
+#     errors:     list of error cases with status code and description
+endpoints: []
+
+# Human Review Required
+# [ ] Confirmed
