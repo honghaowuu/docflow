@@ -75,7 +75,7 @@ Ask one question per message. Present each question as numbered options with one
 > 1. **One [A] has many [B]s** *(recommended — based on [use case step])*
 > 2. One [A] has exactly one [B]
 > 3. Many [A]s relate to many [B]s
-> 4. Other — describe your own"
+> N. Other — describe your own"
 
 **For the glossary — derive candidates from domain-specific terms used in the document:**
 > "These terms in the domain model may need clarification for a new team member:

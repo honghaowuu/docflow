@@ -69,12 +69,13 @@ Ask one question per message. After each answer, derive candidates for the next 
 > Which of these are explicit non-goals? Non-goals must be explicitly stated — empty is not acceptable."
 
 **After non-goals — derive candidate success metrics, one per goal:**
-> "For each goal, here are candidate metrics:
+> "For **[Goal 1]**, a candidate success metric:
 >
-> - **[Goal 1]**: 1. **[Specific metric]** *(recommended)* / 2. [Alternative] / 3. Other
-> - **[Goal 2]**: 1. **[Specific metric]** *(recommended)* / 2. [Alternative] / 3. Other
+> 1. **[Specific metric]** *(recommended)*
+> 2. **[Alternative metric]**
+> N. Other — describe your own"
 >
-> Confirm or adjust each. One metric per goal."
+> *(Repeat for each goal. One metric per goal.)*
 
 **After metrics — derive candidate risks from the problem domain and goals:**
 > "Common risks for this type of product:

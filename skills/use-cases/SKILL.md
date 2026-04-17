@@ -93,6 +93,7 @@ Ask one question per message. Present each question as numbered options with one
 - Every PRD goal maps to at least one use case → if not, ask in candidate-first format: "The PRD lists '[goal]' — which use case covers this, or should we add one?"
 - Every use case has at least one alternative flow → if not, ask for it in candidate-first format
 - Every use case has explicit preconditions → if not, ask in candidate-first format
+- Every use case has explicit postconditions → if not, ask in candidate-first format
 
 ---
 
