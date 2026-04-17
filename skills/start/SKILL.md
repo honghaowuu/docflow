@@ -27,7 +27,17 @@ documents:
     status: missing
   use-cases.md:
     status: missing
+  ux-flow.md:
+    status: missing
   domain-model.md:
+    status: missing
+  ui-spec.md:
+    status: missing
+  api-spec.yaml:
+    status: missing
+  api-implement-logic.md:
+    status: missing
+  test-spec.md:
     status: missing
 ```
 
@@ -84,25 +94,40 @@ git commit -m "docflow: update impact status"
 
 ## Step 3: Present Project Status
 
-Show a status table:
+Show a status table in dependency level order:
 
 ```
 DocFlow Project Status
 
-  prd.md          [icon] [status]   [reason if outdated]
-  use-cases.md    [icon] [status]   [reason if outdated]
-  domain-model.md [icon] [status]   [reason if outdated]
+  Level 0:
+    prd.md                  [icon] [status]   [reason if outdated]
+
+  Level 1:
+    use-cases.md            [icon] [status]   [reason if outdated]
+
+  Level 2:
+    ux-flow.md              [icon] [status]   [reason if outdated]
+    domain-model.md         [icon] [status]   [reason if outdated]
+
+  Level 3:
+    ui-spec.md              [icon] [status]   [reason if outdated]
+    api-spec.yaml           [icon] [status]   [reason if outdated]
+
+  Level 4:
+    api-implement-logic.md  [icon] [status]   [reason if outdated]
+    test-spec.md            [icon] [status]   [reason if outdated]
 
 Icons: ✓ approved   ⚠ outdated   · missing   ~ draft
 ```
 
-Then offer numbered options — only list actions whose preconditions are currently met:
+Then offer numbered options — only list actions whose preconditions are met. For each available document, offer both guided and fast mode. Fast mode is only offered when all dependencies are approved. Fast mode is never offered for `prd.md`.
 
 ```
 What would you like to do?
-1. [Generate next missing doc with dependencies met]
-2. [Regenerate outdated docs]
-3. [Other valid actions]
+1. Generate [doc] — guided (recommended for first generation)
+2. Generate [doc] — fast (derive directly from approved dependencies)
+3. Regenerate [outdated doc] — guided
+4. Regenerate [outdated doc] — fast
 ```
 
 ---
@@ -114,7 +139,12 @@ What would you like to do?
 Dependency graph:
 - `prd.md` → no dependencies
 - `use-cases.md` → requires `prd.md: approved`
+- `ux-flow.md` → requires `prd.md: approved` AND `use-cases.md: approved`
 - `domain-model.md` → requires `prd.md: approved` AND `use-cases.md: approved`
+- `ui-spec.md` → requires `prd.md: approved` AND `ux-flow.md: approved`
+- `api-spec.yaml` → requires `use-cases.md: approved` AND `domain-model.md: approved` AND `ux-flow.md: approved`
+- `api-implement-logic.md` → requires `use-cases.md: approved` AND `api-spec.yaml: approved` AND `domain-model.md: approved`
+- `test-spec.md` → requires `use-cases.md: approved` AND `api-spec.yaml: approved` AND `domain-model.md: approved`
 
 If a user requests generation of a document whose dependencies are not `approved`:
 > "Cannot generate [doc] — [dependency] must be approved first. Would you like to generate [dependency] instead?"
@@ -125,8 +155,20 @@ Do not offer to bypass this. No exceptions.
 
 ## Routing
 
-Based on user's choice, invoke the appropriate skill:
+Based on user's choice, invoke the document skill and communicate the mode (guided or fast):
 
-- Generate / regenerate `prd.md` → **REQUIRED SUB-SKILL:** `docflow:prd`
-- Generate / regenerate `use-cases.md` → **REQUIRED SUB-SKILL:** `docflow:use-cases`
-- Generate / regenerate `domain-model.md` → **REQUIRED SUB-SKILL:** `docflow:domain-model`
+- Generate / regenerate `prd.md` → **REQUIRED SUB-SKILL:** `docflow:prd` (guided only — no dependencies)
+- Generate / regenerate `use-cases.md` guided → **REQUIRED SUB-SKILL:** `docflow:use-cases` — tell it: guided mode
+- Generate / regenerate `use-cases.md` fast → **REQUIRED SUB-SKILL:** `docflow:use-cases` — tell it: fast mode, skip intake
+- Generate / regenerate `ux-flow.md` guided → **REQUIRED SUB-SKILL:** `docflow:ux-flow` — tell it: guided mode
+- Generate / regenerate `ux-flow.md` fast → **REQUIRED SUB-SKILL:** `docflow:ux-flow` — tell it: fast mode, skip intake
+- Generate / regenerate `domain-model.md` guided → **REQUIRED SUB-SKILL:** `docflow:domain-model` — tell it: guided mode
+- Generate / regenerate `domain-model.md` fast → **REQUIRED SUB-SKILL:** `docflow:domain-model` — tell it: fast mode, skip intake
+- Generate / regenerate `ui-spec.md` guided → **REQUIRED SUB-SKILL:** `docflow:ui-spec` — tell it: guided mode
+- Generate / regenerate `ui-spec.md` fast → **REQUIRED SUB-SKILL:** `docflow:ui-spec` — tell it: fast mode, skip intake
+- Generate / regenerate `api-spec.yaml` guided → **REQUIRED SUB-SKILL:** `docflow:api-spec` — tell it: guided mode
+- Generate / regenerate `api-spec.yaml` fast → **REQUIRED SUB-SKILL:** `docflow:api-spec` — tell it: fast mode, skip intake
+- Generate / regenerate `api-implement-logic.md` guided → **REQUIRED SUB-SKILL:** `docflow:api-implement-logic` — tell it: guided mode
+- Generate / regenerate `api-implement-logic.md` fast → **REQUIRED SUB-SKILL:** `docflow:api-implement-logic` — tell it: fast mode, skip intake
+- Generate / regenerate `test-spec.md` guided → **REQUIRED SUB-SKILL:** `docflow:test-spec` — tell it: guided mode
+- Generate / regenerate `test-spec.md` fast → **REQUIRED SUB-SKILL:** `docflow:test-spec` — tell it: fast mode, skip intake
