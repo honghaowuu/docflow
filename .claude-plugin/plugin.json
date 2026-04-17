@@ -1,7 +1,5 @@
 {
   "name": "docflow",
   "version": "1.0.0",
-  "description": "AI-assisted documentation pipeline for Claude Code. Guides generation of 8 software design documents in dependency order with structured AI questioning, human review, and git-tracked approval.",
-  "skills": "skills/",
-  "hooks": "hooks/hooks.json"
+  "description": "AI-assisted documentation pipeline for Claude Code. Guides generation of 8 software design documents in dependency order with structured AI questioning, human review, and git-tracked approval."
 }
