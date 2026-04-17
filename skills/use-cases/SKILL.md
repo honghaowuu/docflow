@@ -33,34 +33,66 @@ All of the following must be collected before calling docflow:pipeline:
 
 ---
 
-## Dynamic Questioning
+## Candidate-First Questioning
 
-Ask one question at a time. Never ask more than one question per message.
+Read `docs/prd.md` before asking any question. Derive candidates from the PRD throughout.
 
-**Start by reading `docs/prd.md`** — extract target users as candidate actors and goals as candidate use case goals.
+Ask one question per message. Present each question as numbered options with one marked `*(recommended)*` and a final option `[N]. Other — describe your own`.
 
-**Opening question:**
-> "Based on the PRD, I've identified these actors: [list from prd.md target users]. Are there others, or should any of these be renamed or split into more specific roles?"
+**Opening question — derive candidate actors from prd.md target users:**
+> "Based on the PRD, I've identified these actors:
+>
+> 1. **[Primary user from prd.md]** *(recommended)*
+> 2. **[Secondary user from prd.md]**
+> 3. Other — describe your own
+>
+> Which actors should be included? You can select multiple, rename, or split any into more specific roles."
 
-**For each confirmed actor:**
-> "What is the most critical thing [actor] needs to accomplish with this product?"
+**For each confirmed actor — derive candidate goals from PRD goals section:**
+> "The PRD goals most relevant to [actor] suggest these use case goals:
+>
+> 1. **[Goal derived from PRD for this actor]** *(recommended)*
+> 2. **[Second derived goal]**
+> 3. Other — describe your own
+>
+> What is the most critical thing [actor] needs to accomplish?"
 
-**For each goal identified per actor, walk through the use case:**
+**For each confirmed goal — derive candidate main flow steps from the PRD problem and goal descriptions:**
+> "For [actor] accomplishing [goal], a likely main flow would be:
+>
+> 1. [Step derived from PRD or domain context]
+> 2. [Step 2]
+> 3. [Step 3]
+>
+> Does this match? What steps are wrong or missing? The main flow needs at least 3 concrete steps."
 
-1. > "Walk me through the steps [actor] takes to accomplish [goal]. What do they do first?"
-   Continue prompting until the main flow has at least 3 concrete steps.
+**For alternative flows — derive candidates from PRD risks and problem description:**
+> "For the step '[step]' in this flow, likely failure modes are:
+>
+> 1. **[Failure derived from PRD risks or problem domain]** *(recommended)*
+> 2. **[Second failure mode]**
+> 3. Other — describe your own
+>
+> What does [actor] do when this step fails? At least one alternative flow is required per use case."
 
-2. > "What could go wrong at any step in that flow? What does [actor] do when it fails?"
-   Capture at least one alternative flow per use case.
+**For preconditions — derive candidates from the goal and system context:**
+> "Before [actor] can start this use case, the following must be true:
+>
+> 1. **[Precondition derived from use case context or PRD]** *(recommended)*
+> 2. **[Second precondition]**
+> 3. Other — describe your own"
 
-3. > "What must be true before [actor] can start this use case? Any system state or prerequisites?"
-
-4. > "What is the exact state of the system when this use case completes successfully?"
+**For postconditions — derive from the goal statement and PRD success metrics:**
+> "When this use case completes successfully, the system state will be:
+>
+> 1. **[Postcondition derived from goal and PRD]** *(recommended)*
+> 2. **[Second postcondition]**
+> 3. Other — describe your own"
 
 **Coverage check before proceeding:**
-- Every PRD goal maps to at least one use case → if not, ask: "The PRD lists '[goal]' — which use case covers this?"
-- Every use case has at least one alternative flow → if not, ask: "What happens if [step] fails in UC-[N]?"
-- Every use case has explicit preconditions → if not, ask: "What must be true before [actor] can start UC-[N]?"
+- Every PRD goal maps to at least one use case → if not, ask in candidate-first format: "The PRD lists '[goal]' — which use case covers this, or should we add one?"
+- Every use case has at least one alternative flow → if not, ask for it in candidate-first format
+- Every use case has explicit preconditions → if not, ask in candidate-first format
 
 ---
 

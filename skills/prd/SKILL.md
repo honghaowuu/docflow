@@ -26,43 +26,75 @@ All of the following must be collected before calling docflow:pipeline:
 
 ---
 
-## Dynamic Questioning
+## Candidate-First Questioning
 
-Ask one question at a time. Never ask more than one question per message.
+Ask one question per message. After each answer, derive candidates for the next question from what the user has told you. Present options as a numbered list with one marked `*(recommended)*`. Always include a final option: `[N]. Other — describe your own`.
 
-**Opening question:**
+**Opening question — open-ended (no prior context to derive candidates from):**
 > "What problem does this product solve?"
 
-**Decision tree after each answer:**
+**After the problem is stated — derive candidate primary users from the problem description:**
+> "Based on the problem you described, these seem like the most likely primary users:
+>
+> 1. **[Role most directly affected by problem]** *(recommended)*
+> 2. **[Second likely role]**
+> 3. Other — describe your own
+>
+> Which are correct? You can select multiple or adjust."
 
-- Answer is vague or abstract (e.g., "improve productivity", "make things easier") →
-  > "Who experiences this problem most acutely, and what does it cost them in time, money, or quality?"
+**After users confirmed — derive candidate goals from the problem and users:**
+> "Given those users and that problem, these seem like the most important outcomes this product must achieve:
+>
+> 1. **[Measurable outcome derived from the problem statement]** *(recommended)*
+> 2. **[Second likely measurable outcome]**
+> 3. **[Third likely outcome]**
+> 4. Other — describe your own
+>
+> Which of these should be goals? Each goal must be measurable — if any are vague, I'll ask you to sharpen them."
 
-- Problem is clear → move to users:
-  > "Who are the primary users of this product?"
+**If a proposed or selected goal is vague (e.g. "better experience", "faster workflow") — validate before accepting:**
+> "How would you measure '[goal]'? For example:
+>
+> 1. **[Specific observable or numeric metric]** *(recommended)*
+> 2. **[Alternative metric]**
+> 3. Other — describe your own"
 
-- Users defined → move to goals:
-  > "What are the 2–5 most important outcomes this product must achieve for those users?"
+**After goals confirmed — derive candidate non-goals from what the goals do NOT cover:**
+> "Based on the goals, these adjacent things might be out of scope — worth stating explicitly:
+>
+> 1. **[Adjacent capability not addressed by any goal]** *(recommended)*
+> 2. **[Another adjacent out-of-scope item]**
+> 3. Other — describe your own
+>
+> Which of these are explicit non-goals? Non-goals must be explicitly stated — empty is not acceptable."
 
-- A goal is vague (e.g., "better experience", "faster workflow") → validate it:
-  > "How would you measure '[goal]'? What does success look like in observable or numeric terms?"
+**After non-goals — derive candidate success metrics, one per goal:**
+> "For each goal, here are candidate metrics:
+>
+> - **[Goal 1]**: 1. **[Specific metric]** *(recommended)* / 2. [Alternative] / 3. Other
+> - **[Goal 2]**: 1. **[Specific metric]** *(recommended)* / 2. [Alternative] / 3. Other
+>
+> Confirm or adjust each. One metric per goal."
 
-- Goals are measurable → move to non-goals:
-  > "What are the explicit non-goals — things this product will NOT do, even if they seem related?"
+**After metrics — derive candidate risks from the problem domain and goals:**
+> "Common risks for this type of product:
+>
+> 1. **[Technical risk derived from approach or domain]** *(recommended)*
+> 2. **[Adoption or user behaviour risk]**
+> 3. **[Resource or timeline risk]**
+> 4. Other — describe your own
+>
+> Which risks apply? At least one is required."
 
-- Non-goals defined → move to metrics:
-  > "For each goal, what is the specific metric that tells you the goal has been achieved?"
-
-- Metrics defined → move to risks:
-  > "What is the most likely thing that could prevent this product from succeeding?"
-
-- Each risk identified → ask for mitigation:
-  > "How will you address that risk?"
-
-- Continue until every field in the Required Information table is covered.
+**For each confirmed risk — derive a candidate mitigation:**
+> "For the risk '[risk]', a likely mitigation:
+>
+> 1. **[Mitigation derived from the problem context]** *(recommended)*
+> 2. **[Alternative mitigation]**
+> 3. Other — describe your own"
 
 **Coverage check before proceeding:**
-Can you fill every row of the Required Information table from the answers collected? If any row is empty, ask the missing question before proceeding.
+Can you fill every row of the Required Information table from the answers collected? If any row is empty, ask for it using candidate-first format before proceeding.
 
 ---
 

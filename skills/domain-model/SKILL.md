@@ -34,32 +34,63 @@ All of the following must be collected before calling docflow:pipeline:
 
 ---
 
-## Dynamic Questioning
+## Candidate-First Questioning
 
-Ask one question at a time. Never ask more than one question per message.
+Read `docs/use-cases.md` and `docs/prd.md` before asking any question. Derive candidates from these documents throughout.
 
-**Start by reading `docs/use-cases.md`** — extract nouns that appear as subjects or objects in main flows as candidate entities. Also read `docs/prd.md` for any domain terms introduced there.
+Ask one question per message. Present each question as numbered options with one marked `*(recommended)*` and a final option `[N]. Other — describe your own`.
 
-**Opening question:**
-> "I've identified these candidate entities from the use cases: [list of nouns]. Which of these are core domain concepts? Which are UI concerns (screens, forms, buttons) or infrastructure concerns (databases, queues, APIs) that should be excluded?"
+**Opening question — derive candidate entities from nouns in use-case main flows:**
+> "I've identified these candidate entities from the use cases:
+>
+> 1. **[Core domain noun from main flows]** *(recommended — appears most frequently)*
+> 2. **[Second domain noun]** *(recommended)*
+> 3. **[Noun that may be a UI concern]**
+> 4. **[Noun that may be infrastructure]**
+> N. Other — add your own
+>
+> Which are core domain concepts to include? Which are UI/infrastructure concerns to exclude? An excluded entity needs a reason."
 
-**For each confirmed entity:**
+**For each confirmed entity — derive candidate attributes from use-case steps:**
+> "For [entity], these attributes appear in the use case flows:
+>
+> 1. **[Attribute from use case step — field the domain logic depends on]** *(recommended)*
+> 2. **[Second attribute]**
+> 3. Other — describe your own
+>
+> Which attributes does the domain logic depend on? Exclude display fields and technical identifiers like database IDs."
 
-1. > "What are the essential attributes of [entity]? Focus on what the domain logic actually depends on — not display fields or technical identifiers."
+**For each confirmed entity — derive candidate invariants from use-case preconditions and postconditions:**
+> "Based on how [entity] is used in the use cases, these rules likely always hold:
+>
+> 1. **[Invariant derived from use-case precondition or postcondition]** *(recommended)*
+> 2. **[Second invariant]**
+> 3. Other — describe your own
+>
+> Which invariants are correct? At least one invariant is required per entity."
 
-2. > "What rules must always be true about [entity]? For example: 'A [entity] must always have [field]', or '[entity] cannot be in states X and Y simultaneously.'"
+**For relationships — derive candidate cardinalities from how entities interact in use case flows:**
+> "The use cases show [entity A] and [entity B] interacting. The relationship seems to be:
+>
+> 1. **One [A] has many [B]s** *(recommended — based on [use case step])*
+> 2. One [A] has exactly one [B]
+> 3. Many [A]s relate to many [B]s
+> 4. Other — describe your own"
 
-**For relationships** (iterate through confirmed entity pairs that interact in use cases):
-> "How does [entity A] relate to [entity B]? How many [A]s can one [B] have, and vice versa?"
-
-**For the glossary:**
-> "Are there any terms in this document that someone joining the team next week might misunderstand or interpret differently than you intend?"
+**For the glossary — derive candidates from domain-specific terms used in the document:**
+> "These terms in the domain model may need clarification for a new team member:
+>
+> 1. **[Term A]** — suggested definition: [definition derived from use case context] *(recommended)*
+> 2. **[Term B]** — suggested definition: [definition]
+> 3. Other — add your own
+>
+> Which definitions are correct? Which terms are missing?"
 
 **Coverage check before proceeding:**
 - Every noun from use-case main flows is either included as an entity or explicitly excluded with a reason
 - Every relationship has a cardinality
 - Every entity has at least one invariant
-- Every domain-specific term in the document appears in the glossary
+- Every domain-specific term used in the document appears in the glossary
 
 ---
 
