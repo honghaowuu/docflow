@@ -143,6 +143,38 @@ check_contains "templates/test-spec.md" "<!-- AI Generated -->" "test-spec templ
 check_contains "templates/test-spec.md" "<!-- Human Review Required -->" "test-spec template: Human Review Required markers"
 
 echo ""
+echo "--- Status File Consistency ---"
+STATUS_FILE="$PLUGIN_ROOT/.docflow/status.yaml"
+if [ -f "$STATUS_FILE" ]; then
+    # Check all 8 documents are listed
+    DOC_COUNT=0
+    for d in prd.md use-cases.md ux-flow.md domain-model.md ui-spec.md api-spec.yaml api-implement-logic.md test-spec.md; do
+        grep -q "  $d:" "$STATUS_FILE" 2>/dev/null && DOC_COUNT=$((DOC_COUNT+1))
+    done
+    [ "$DOC_COUNT" -eq 8 ] \
+        && pass "status.yaml: all 8 documents listed" \
+        || fail "status.yaml: missing entries — re-run 'init docflow' to upgrade (found $DOC_COUNT/8)"
+
+    # Check approved/draft/outdated docs have files on disk
+    for doc in prd.md use-cases.md ux-flow.md domain-model.md ui-spec.md api-spec.yaml api-implement-logic.md test-spec.md; do
+        doc_status=$(grep -A2 "  $doc:" "$STATUS_FILE" 2>/dev/null | grep "status:" | awk '{print $2}')
+        case "$doc_status" in
+            approved|draft|outdated)
+                [ -f "$PLUGIN_ROOT/docs/$doc" ] \
+                    && pass "status.yaml: $doc ($doc_status) has file on disk" \
+                    || fail "status.yaml: $doc is $doc_status but docs/$doc not found"
+                ;;
+            missing)
+                [ -f "$PLUGIN_ROOT/docs/$doc" ] \
+                    && echo "  WARN: docs/$doc exists but status.yaml lists it as missing"
+                ;;
+        esac
+    done
+else
+    echo "  (skipping — .docflow/status.yaml not found)"
+fi
+
+echo ""
 echo "--- Hook ---"
 check_executable "hooks/session-start"
 check_contains "hooks/hooks.json" "SessionStart" "hooks.json: has SessionStart event"
