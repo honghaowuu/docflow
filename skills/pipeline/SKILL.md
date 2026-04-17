@@ -53,7 +53,7 @@ After each generated section body, insert three annotation lines:
 Place annotations between the generated content and the review marker (`<!-- Human Review Required -->` for `.md` files, `# Human Review Required` for `.yaml` files).
 
 For `.yaml` documents, use YAML comment prefix for annotation lines:
-```
+```yaml
 # AI Reasoning: [what inputs and logic produced this content]
 # Assumption: [any inference the human must validate — write "None" if no assumption]
 # Review focus: [the single most important question to answer before confirming]
@@ -67,7 +67,7 @@ For `.yaml` documents, use YAML comment prefix for annotation lines:
 
 Before writing to disk, review the assembled document:
 
-- [ ] All `<!-- AI Generated -->` sections are filled
+- [ ] All `<!-- AI Generated -->` sections are filled (`.md`) or all `# AI Generated` sections are filled (`.yaml`)
 - [ ] Every section has all three annotation types
 - [ ] No logical contradictions between sections
 - [ ] Content is consistent with dependency documents
