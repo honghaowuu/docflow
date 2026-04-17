@@ -42,6 +42,8 @@ check_file "skills/ui-spec/SKILL.md"
 check_file "skills/api-spec/SKILL.md"
 check_file "skills/api-implement-logic/SKILL.md"
 check_file "skills/test-spec/SKILL.md"
+check_file "skills/repair/SKILL.md"
+check_file "skills/generate-all/SKILL.md"
 check_file "templates/prd.md"
 check_file "templates/use-cases.md"
 check_file "templates/domain-model.md"
@@ -53,7 +55,7 @@ check_file "templates/test-spec.md"
 
 echo ""
 echo "--- Skill Frontmatter (CSO descriptions) ---"
-for skill in start pipeline prd use-cases domain-model ux-flow ui-spec api-spec api-implement-logic test-spec; do
+for skill in start pipeline prd use-cases domain-model ux-flow ui-spec api-spec api-implement-logic test-spec repair generate-all; do
     check_contains "skills/$skill/SKILL.md" "^name:" "$skill: has name frontmatter"
     check_contains "skills/$skill/SKILL.md" "description: Use when" "$skill: description starts with 'Use when'"
 done
@@ -102,6 +104,10 @@ check_contains "skills/api-implement-logic/SKILL.md" "REQUIRED SUB-SKILL.*docflo
     "api-implement-logic: hands off to pipeline"
 check_contains "skills/test-spec/SKILL.md" "REQUIRED SUB-SKILL.*docflow:pipeline" \
     "test-spec: hands off to pipeline"
+check_contains "skills/repair/SKILL.md" "REQUIRED SUB-SKILL.*docflow:pipeline" \
+    "repair: hands off to pipeline"
+check_contains "skills/generate-all/SKILL.md" "REQUIRED SUB-SKILL.*docflow:use-cases" \
+    "generate-all: hands off to use-cases"
 
 echo ""
 echo "--- Orchestrator Routing ---"
@@ -114,6 +120,8 @@ check_contains "skills/start/SKILL.md" "docflow:prd" "start: routes to prd"
 check_contains "skills/start/SKILL.md" "docflow:use-cases" "start: routes to use-cases"
 check_contains "skills/start/SKILL.md" "docflow:domain-model" "start: routes to domain-model"
 check_contains "skills/start/SKILL.md" "fast mode" "start: mentions fast mode"
+check_contains "skills/start/SKILL.md" "docflow:repair" "start: routes to repair"
+check_contains "skills/start/SKILL.md" "docflow:generate-all" "start: routes to generate-all"
 
 echo ""
 echo "--- Templates ---"
