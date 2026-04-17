@@ -29,7 +29,6 @@ echo "=== DocFlow Plugin Validation ==="
 echo ""
 
 echo "--- Structure ---"
-check_file "package.json"
 check_file "hooks/hooks.json"
 check_file "hooks/session-start"
 check_file "skills/start/SKILL.md"
