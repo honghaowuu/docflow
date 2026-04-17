@@ -1,0 +1,12 @@
+{
+  "name": "docflow",
+  "owner": { "name": "honghaowu" },
+  "plugins": [
+    {
+      "name": "docflow",
+      "source": "./",
+      "description": "AI-assisted documentation pipeline for Claude Code. Guides generation of 8 software design documents in dependency order with structured AI questioning, human review, and git-tracked approval.",
+      "version": "1.0.0"
+    }
+  ]
+}
