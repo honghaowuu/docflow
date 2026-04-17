@@ -128,6 +128,9 @@ What would you like to do?
 2. Generate [doc] — fast (derive directly from approved dependencies)
 3. Regenerate [outdated doc] — guided
 4. Regenerate [outdated doc] — fast
+5. Repair [outdated doc] — patch only the sections affected by dependency changes
+6. Generate all remaining documents — guided, with checkpoints between each document
+   (offered when prd.md is approved and at least one downstream document is missing or outdated)
 ```
 
 ---
@@ -173,3 +176,4 @@ Based on user's choice, invoke the document skill and communicate the mode (guid
 - Generate / regenerate `test-spec.md` guided → **REQUIRED SUB-SKILL:** `docflow:test-spec` — tell it: guided mode
 - Generate / regenerate `test-spec.md` fast → **REQUIRED SUB-SKILL:** `docflow:test-spec` — tell it: fast mode, skip intake
 - Repair any outdated doc → **REQUIRED SUB-SKILL:** `docflow:repair` — pass the document name and its outdated_because list
+- Generate all remaining documents → **REQUIRED SUB-SKILL:** `docflow:generate-all`
