@@ -31,7 +31,8 @@ echo ""
 echo "--- Structure ---"
 check_file "hooks/hooks.json"
 check_file "hooks/session-start"
-check_file "skills/start/SKILL.md"
+check_file "hooks/start-context.md"
+check_file "commands/start.md"
 check_file "skills/pipeline/SKILL.md"
 check_file "skills/prd/SKILL.md"
 check_file "skills/use-cases/SKILL.md"
@@ -54,7 +55,7 @@ check_file "templates/test-spec.md"
 
 echo ""
 echo "--- Skill Frontmatter (CSO descriptions) ---"
-for skill in start pipeline prd use-cases domain-model ux-flow ui-spec api-spec api-implement-logic test-spec repair generate-all; do
+for skill in pipeline prd use-cases domain-model ux-flow ui-spec api-spec api-implement-logic test-spec repair generate-all; do
     check_contains "skills/$skill/SKILL.md" "^name:" "$skill: has name frontmatter"
     check_contains "skills/$skill/SKILL.md" "description: Use when" "$skill: description starts with 'Use when'"
 done
@@ -70,9 +71,9 @@ check_contains "skills/pipeline/SKILL.md" \
 check_contains "skills/pipeline/SKILL.md" \
     "NO CLEAN DOCUMENT COMMITTED WITHOUT HUMAN APPROVAL" \
     "pipeline: approval Iron Law"
-check_contains "skills/start/SKILL.md" \
+check_contains "hooks/start-context.md" \
     "NO DOCUMENT GENERATION WITHOUT ALL DEPENDENCIES APPROVED" \
-    "start: dependency Iron Law"
+    "start-context: dependency Iron Law"
 
 echo ""
 echo "--- Candidate-First Pattern ---"
@@ -110,17 +111,17 @@ check_contains "skills/generate-all/SKILL.md" "REQUIRED SUB-SKILL.*docflow:use-c
 
 echo ""
 echo "--- Orchestrator Routing ---"
-check_contains "skills/start/SKILL.md" "docflow:ux-flow" "start: routes to ux-flow"
-check_contains "skills/start/SKILL.md" "docflow:ui-spec" "start: routes to ui-spec"
-check_contains "skills/start/SKILL.md" "docflow:api-spec" "start: routes to api-spec"
-check_contains "skills/start/SKILL.md" "docflow:api-implement-logic" "start: routes to api-implement-logic"
-check_contains "skills/start/SKILL.md" "docflow:test-spec" "start: routes to test-spec"
-check_contains "skills/start/SKILL.md" "docflow:prd" "start: routes to prd"
-check_contains "skills/start/SKILL.md" "docflow:use-cases" "start: routes to use-cases"
-check_contains "skills/start/SKILL.md" "docflow:domain-model" "start: routes to domain-model"
-check_contains "skills/start/SKILL.md" "fast mode" "start: mentions fast mode"
-check_contains "skills/start/SKILL.md" "docflow:repair" "start: routes to repair"
-check_contains "skills/start/SKILL.md" "docflow:generate-all" "start: routes to generate-all"
+check_contains "hooks/start-context.md" "docflow:ux-flow" "start: routes to ux-flow"
+check_contains "hooks/start-context.md" "docflow:ui-spec" "start: routes to ui-spec"
+check_contains "hooks/start-context.md" "docflow:api-spec" "start: routes to api-spec"
+check_contains "hooks/start-context.md" "docflow:api-implement-logic" "start: routes to api-implement-logic"
+check_contains "hooks/start-context.md" "docflow:test-spec" "start: routes to test-spec"
+check_contains "hooks/start-context.md" "docflow:prd" "start: routes to prd"
+check_contains "hooks/start-context.md" "docflow:use-cases" "start: routes to use-cases"
+check_contains "hooks/start-context.md" "docflow:domain-model" "start: routes to domain-model"
+check_contains "hooks/start-context.md" "fast mode" "start: mentions fast mode"
+check_contains "hooks/start-context.md" "docflow:repair" "start: routes to repair"
+check_contains "hooks/start-context.md" "docflow:generate-all" "start: routes to generate-all"
 
 echo ""
 echo "--- Templates ---"

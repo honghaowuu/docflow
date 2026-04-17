@@ -6,11 +6,12 @@ AI-assisted documentation pipeline for Claude Code. DocFlow guides you through g
 
 ## How It Works
 
-DocFlow uses a layered skill architecture:
+DocFlow uses a layered architecture:
 
-1. **`docflow:start`** — Checks project status, detects upstream changes, and presents what you can generate next
-2. **`docflow:<doc>`** — Runs guided or fast intake for a specific document, then hands off to the pipeline
-3. **`docflow:pipeline`** — Generates, annotates, collects human review, strips annotations, and commits the clean document
+1. **SessionStart hook** — Auto-loads the orchestrator context whenever a DocFlow project is detected in the working directory
+2. **`/docflow:start`** — The entry command. Triggers status check, change detection, and presents available actions. The hook has already loaded all instructions, so the command is a one-line trigger.
+3. **`docflow:<doc>`** — Runs guided or fast intake for a specific document, then hands off to the pipeline
+4. **`docflow:pipeline`** — Generates, annotates, collects human review, strips annotations, and commits the clean document
 
 Every document is generated with three annotation types per section (AI Reasoning, Assumption, Review focus), reviewed by a human, then committed clean. No document is committed without explicit approval.
 
@@ -61,7 +62,7 @@ This creates `.docflow/status.yaml` tracking the approval state of all 8 documen
 ### 3. Start a session
 
 ```
-docflow start
+/docflow:start
 ```
 
 Claude will show a status table and offer the next available actions.
@@ -138,9 +139,10 @@ NO DOCUMENT GENERATION WITHOUT ALL DEPENDENCIES APPROVED
 ├── .claude-plugin/
 │   ├── plugin.json         # Plugin manifest
 │   └── marketplace.json    # Marketplace descriptor (enables github install)
+├── commands/
+│   └── start.md            # /docflow:start entry command
 ├── settings.json           # Default permissions granted when plugin is enabled
 ├── skills/
-│   ├── start/              # Orchestrator
 │   ├── pipeline/           # Shared generate → review → commit pipeline
 │   ├── prd/
 │   ├── use-cases/
@@ -151,9 +153,11 @@ NO DOCUMENT GENERATION WITHOUT ALL DEPENDENCIES APPROVED
 │   ├── api-implement-logic/
 │   └── test-spec/
 ├── templates/              # Document templates with annotation markers
-├── hooks/                  # SessionStart hook
+├── hooks/
+│   ├── session-start       # SessionStart hook (detects project, injects context)
+│   └── start-context.md    # Orchestrator instructions injected by the hook
 ├── tests/
-│   └── validate.sh         # Structural validation (97 checks)
+│   └── validate.sh         # Structural validation (98 checks)
 └── .docflow/
     └── status.yaml         # Per-document approval state (created on init)
 ```
