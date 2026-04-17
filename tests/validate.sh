@@ -175,6 +175,47 @@ else
 fi
 
 echo ""
+echo "--- Dependency Order Integrity ---"
+if [ -f "$STATUS_FILE" ]; then
+    # Helper: get status of a doc from status.yaml
+    get_status() {
+        grep -A2 "  $1:" "$STATUS_FILE" 2>/dev/null | grep "status:" | awk '{print $2}'
+    }
+
+    # check_dep DOC DEP: if DOC is approved, DEP must also be approved
+    check_dep() {
+        local doc="$1" dep="$2"
+        local doc_st dep_st
+        doc_st=$(get_status "$doc")
+        dep_st=$(get_status "$dep")
+        if [ "$doc_st" = "approved" ]; then
+            [ "$dep_st" = "approved" ] \
+                && pass "dep integrity: $doc approved and $dep approved" \
+                || fail "dep integrity: $doc is approved but $dep is ${dep_st:-missing} — dependency chain is broken"
+        fi
+    }
+
+    check_dep "use-cases.md"           "prd.md"
+    check_dep "ux-flow.md"             "prd.md"
+    check_dep "ux-flow.md"             "use-cases.md"
+    check_dep "domain-model.md"        "prd.md"
+    check_dep "domain-model.md"        "use-cases.md"
+    check_dep "ui-spec.md"             "prd.md"
+    check_dep "ui-spec.md"             "ux-flow.md"
+    check_dep "api-spec.yaml"          "use-cases.md"
+    check_dep "api-spec.yaml"          "domain-model.md"
+    check_dep "api-spec.yaml"          "ux-flow.md"
+    check_dep "api-implement-logic.md" "use-cases.md"
+    check_dep "api-implement-logic.md" "api-spec.yaml"
+    check_dep "api-implement-logic.md" "domain-model.md"
+    check_dep "test-spec.md"           "use-cases.md"
+    check_dep "test-spec.md"           "api-spec.yaml"
+    check_dep "test-spec.md"           "domain-model.md"
+else
+    echo "  (skipping — .docflow/status.yaml not found)"
+fi
+
+echo ""
 echo "--- Hook ---"
 check_executable "hooks/session-start"
 check_contains "hooks/hooks.json" "SessionStart" "hooks.json: has SessionStart event"
