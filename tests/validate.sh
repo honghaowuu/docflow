@@ -37,13 +37,23 @@ check_file "skills/pipeline/SKILL.md"
 check_file "skills/prd/SKILL.md"
 check_file "skills/use-cases/SKILL.md"
 check_file "skills/domain-model/SKILL.md"
+check_file "skills/ux-flow/SKILL.md"
+check_file "skills/ui-spec/SKILL.md"
+check_file "skills/api-spec/SKILL.md"
+check_file "skills/api-implement-logic/SKILL.md"
+check_file "skills/test-spec/SKILL.md"
 check_file "templates/prd.md"
 check_file "templates/use-cases.md"
 check_file "templates/domain-model.md"
+check_file "templates/ux-flow.md"
+check_file "templates/ui-spec.md"
+check_file "templates/api-spec.yaml"
+check_file "templates/api-implement-logic.md"
+check_file "templates/test-spec.md"
 
 echo ""
 echo "--- Skill Frontmatter (CSO descriptions) ---"
-for skill in start pipeline prd use-cases domain-model; do
+for skill in start pipeline prd use-cases domain-model ux-flow ui-spec api-spec api-implement-logic test-spec; do
     check_contains "skills/$skill/SKILL.md" "^name:" "$skill: has name frontmatter"
     check_contains "skills/$skill/SKILL.md" "description: Use when" "$skill: description starts with 'Use when'"
 done
@@ -64,6 +74,17 @@ check_contains "skills/start/SKILL.md" \
     "start: dependency Iron Law"
 
 echo ""
+echo "--- Candidate-First Pattern ---"
+check_contains "skills/prd/SKILL.md" "recommended" "prd: has candidate-first recommendations"
+check_contains "skills/use-cases/SKILL.md" "recommended" "use-cases: has candidate-first recommendations"
+check_contains "skills/domain-model/SKILL.md" "recommended" "domain-model: has candidate-first recommendations"
+check_contains "skills/ux-flow/SKILL.md" "recommended" "ux-flow: has candidate-first recommendations"
+check_contains "skills/ui-spec/SKILL.md" "recommended" "ui-spec: has candidate-first recommendations"
+check_contains "skills/api-spec/SKILL.md" "recommended" "api-spec: has candidate-first recommendations"
+check_contains "skills/api-implement-logic/SKILL.md" "recommended" "api-implement-logic: has candidate-first recommendations"
+check_contains "skills/test-spec/SKILL.md" "recommended" "test-spec: has candidate-first recommendations"
+
+echo ""
 echo "--- REQUIRED SUB-SKILL Handoffs ---"
 check_contains "skills/prd/SKILL.md" "REQUIRED SUB-SKILL.*docflow:pipeline" \
     "prd: hands off to pipeline"
@@ -71,6 +92,25 @@ check_contains "skills/use-cases/SKILL.md" "REQUIRED SUB-SKILL.*docflow:pipeline
     "use-cases: hands off to pipeline"
 check_contains "skills/domain-model/SKILL.md" "REQUIRED SUB-SKILL.*docflow:pipeline" \
     "domain-model: hands off to pipeline"
+check_contains "skills/ux-flow/SKILL.md" "REQUIRED SUB-SKILL.*docflow:pipeline" \
+    "ux-flow: hands off to pipeline"
+check_contains "skills/ui-spec/SKILL.md" "REQUIRED SUB-SKILL.*docflow:pipeline" \
+    "ui-spec: hands off to pipeline"
+check_contains "skills/api-spec/SKILL.md" "REQUIRED SUB-SKILL.*docflow:pipeline" \
+    "api-spec: hands off to pipeline"
+check_contains "skills/api-implement-logic/SKILL.md" "REQUIRED SUB-SKILL.*docflow:pipeline" \
+    "api-implement-logic: hands off to pipeline"
+check_contains "skills/test-spec/SKILL.md" "REQUIRED SUB-SKILL.*docflow:pipeline" \
+    "test-spec: hands off to pipeline"
+
+echo ""
+echo "--- Orchestrator Routing ---"
+check_contains "skills/start/SKILL.md" "docflow:ux-flow" "start: routes to ux-flow"
+check_contains "skills/start/SKILL.md" "docflow:ui-spec" "start: routes to ui-spec"
+check_contains "skills/start/SKILL.md" "docflow:api-spec" "start: routes to api-spec"
+check_contains "skills/start/SKILL.md" "docflow:api-implement-logic" "start: routes to api-implement-logic"
+check_contains "skills/start/SKILL.md" "docflow:test-spec" "start: routes to test-spec"
+check_contains "skills/start/SKILL.md" "fast" "start: mentions fast mode"
 
 echo ""
 echo "--- Templates ---"
@@ -80,6 +120,16 @@ check_contains "templates/use-cases.md" "<!-- AI Generated -->" "use-cases templ
 check_contains "templates/use-cases.md" "<!-- Human Review Required -->" "use-cases template: Human Review Required markers"
 check_contains "templates/domain-model.md" "<!-- AI Generated -->" "domain-model template: AI Generated markers"
 check_contains "templates/domain-model.md" "<!-- Human Review Required -->" "domain-model template: Human Review Required markers"
+check_contains "templates/ux-flow.md" "<!-- AI Generated -->" "ux-flow template: AI Generated markers"
+check_contains "templates/ux-flow.md" "<!-- Human Review Required -->" "ux-flow template: Human Review Required markers"
+check_contains "templates/ui-spec.md" "<!-- AI Generated -->" "ui-spec template: AI Generated markers"
+check_contains "templates/ui-spec.md" "<!-- Human Review Required -->" "ui-spec template: Human Review Required markers"
+check_contains "templates/api-spec.yaml" "# AI Generated" "api-spec template: AI Generated markers"
+check_contains "templates/api-spec.yaml" "# Human Review Required" "api-spec template: Human Review Required markers"
+check_contains "templates/api-implement-logic.md" "<!-- AI Generated -->" "api-implement-logic template: AI Generated markers"
+check_contains "templates/api-implement-logic.md" "<!-- Human Review Required -->" "api-implement-logic template: Human Review Required markers"
+check_contains "templates/test-spec.md" "<!-- AI Generated -->" "test-spec template: AI Generated markers"
+check_contains "templates/test-spec.md" "<!-- Human Review Required -->" "test-spec template: Human Review Required markers"
 
 echo ""
 echo "--- Hook ---"
