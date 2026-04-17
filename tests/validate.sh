@@ -218,8 +218,9 @@ fi
 echo ""
 echo "--- Hook ---"
 check_executable "hooks/session-start"
-check_contains "hooks/hooks.json" "SessionStart" "hooks.json: has SessionStart event"
-check_contains "hooks/hooks.json" "session-start" "hooks.json: references session-start script"
+check_contains "settings.json" "SessionStart" "settings.json: has SessionStart hook registered"
+check_contains "settings.json" "CLAUDE_PLUGIN_ROOT" "settings.json: hook uses \${CLAUDE_PLUGIN_ROOT}"
+check_contains "settings.json" "session-start" "settings.json: hook references session-start script"
 
 echo ""
 echo "=== Results: $PASS passed, $FAIL failed ==="
