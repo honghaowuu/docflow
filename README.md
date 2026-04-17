@@ -157,7 +157,7 @@ NO DOCUMENT GENERATION WITHOUT ALL DEPENDENCIES APPROVED
 │   ├── session-start       # SessionStart hook (detects project, injects context)
 │   └── start-context.md    # Orchestrator instructions injected by the hook
 ├── tests/
-│   └── validate.sh         # Structural validation (98 checks)
+│   └── validate.sh         # Structural validation (97 checks)
 └── .docflow/
     └── status.yaml         # Per-document approval state (created on init)
 ```
