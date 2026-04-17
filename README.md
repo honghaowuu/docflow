@@ -39,7 +39,16 @@ A document cannot be generated until all its dependencies are approved.
 
 ### 1. Install the plugin
 
-Install via the Superpowers plugin system, then open a project in Claude Code.
+```bash
+# Add the DocFlow marketplace (once per machine)
+claude plugin marketplace add github:honghaowu/docflow
+
+# Install in your project
+claude plugin install docflow --scope local
+
+# Or install globally for all projects
+claude plugin install docflow --scope user
+```
 
 ### 2. Initialize DocFlow
 
@@ -126,11 +135,13 @@ NO DOCUMENT GENERATION WITHOUT ALL DEPENDENCIES APPROVED
 
 ```
 .
-├── plugin.json         # Plugin manifest (name, version, skill/hook locations)
-├── settings.json       # Default permissions granted when plugin is enabled
+├── .claude-plugin/
+│   ├── plugin.json         # Plugin manifest
+│   └── marketplace.json    # Marketplace descriptor (enables github install)
+├── settings.json           # Default permissions granted when plugin is enabled
 ├── skills/
-│   ├── start/          # Orchestrator
-│   ├── pipeline/       # Shared generate → review → commit pipeline
+│   ├── start/              # Orchestrator
+│   ├── pipeline/           # Shared generate → review → commit pipeline
 │   ├── prd/
 │   ├── use-cases/
 │   ├── ux-flow/
@@ -139,12 +150,12 @@ NO DOCUMENT GENERATION WITHOUT ALL DEPENDENCIES APPROVED
 │   ├── api-spec/
 │   ├── api-implement-logic/
 │   └── test-spec/
-├── templates/          # Document templates with annotation markers
-├── hooks/              # SessionStart hook
+├── templates/              # Document templates with annotation markers
+├── hooks/                  # SessionStart hook
 ├── tests/
-│   └── validate.sh     # Structural validation (89 checks)
+│   └── validate.sh         # Structural validation (97 checks)
 └── .docflow/
-    └── status.yaml     # Per-document approval state (created on init)
+    └── status.yaml         # Per-document approval state (created on init)
 ```
 
 ---
@@ -155,4 +166,4 @@ NO DOCUMENT GENERATION WITHOUT ALL DEPENDENCIES APPROVED
 bash tests/validate.sh
 ```
 
-Checks all 89 structural requirements: file existence, skill frontmatter, Iron Laws, candidate-first pattern, pipeline handoffs, routing, template markers, and hook configuration.
+Checks all 97 structural requirements: file existence, skill frontmatter, Iron Laws, candidate-first pattern, pipeline handoffs, routing, template markers, and hook configuration.
