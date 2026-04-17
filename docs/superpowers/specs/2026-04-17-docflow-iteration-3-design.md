@@ -129,7 +129,7 @@ Extend the existing `validate.sh` with two new check sections appended after the
 
 When `.docflow/status.yaml` exists:
 
-- All 8 documents are listed in `status.yaml`
+- All 8 documents are listed in `status.yaml` — if fewer than 8 entries are found, fail with: `"status.yaml is missing entries — re-run 'init docflow' to upgrade"`
 - Every document with `status: approved`, `draft`, or `outdated` has a corresponding file at `docs/<doc>`
 - Any document file present at `docs/<doc>` while `status.yaml` lists it as `missing` is flagged as a warning (not a hard fail)
 
