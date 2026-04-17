@@ -20,6 +20,15 @@ Stop here. Do not proceed without an approved prd.md.
 
 ---
 
+## Fast Mode
+
+If the orchestrator indicated fast mode:
+1. Read `docs/prd.md` in full
+2. Skip all intake questioning — pass dependency contents directly to `docflow:pipeline`
+3. Jump to the Template section below
+
+---
+
 ## Required Information
 
 All of the following must be collected before calling docflow:pipeline:

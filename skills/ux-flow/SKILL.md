@@ -13,8 +13,8 @@ description: Use when the user wants to generate or regenerate the UX Flow docum
 
 Read `.docflow/status.yaml`. Verify both `prd.md` and `use-cases.md` have `status: approved`.
 
-If either is not approved:
-> "Cannot generate ux-flow.md — [missing doc] must be approved first."
+If either is not approved, identify which document is missing and tell the user:
+> "Cannot generate ux-flow.md — [name the specific missing document] must be approved first."
 
 Stop here. Do not proceed with unapproved dependencies.
 

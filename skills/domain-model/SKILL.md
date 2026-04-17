@@ -13,10 +13,19 @@ description: Use when the user wants to generate or regenerate the Domain Model 
 
 Read `.docflow/status.yaml`. Verify both `prd.md` and `use-cases.md` have `status: approved`.
 
-If either is not approved:
-> "Cannot generate domain-model.md — [missing doc] must be approved first."
+If either is not approved, identify which document is missing and tell the user:
+> "Cannot generate domain-model.md — [name the specific missing document] must be approved first."
 
 Stop here. Do not proceed with unapproved dependencies.
+
+---
+
+## Fast Mode
+
+If the orchestrator indicated fast mode:
+1. Read `docs/use-cases.md` and `docs/prd.md` in full
+2. Skip all intake questioning — pass dependency contents directly to `docflow:pipeline`
+3. Jump to the Template section below
 
 ---
 
