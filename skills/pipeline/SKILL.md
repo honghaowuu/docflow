@@ -31,9 +31,12 @@ NO CLEAN DOCUMENT COMMITTED WITHOUT HUMAN APPROVAL FIRST
 
 ## Step 1: Generate
 
-Using the intake answers and dependency content, fill every `<!-- AI Generated -->` section in the template.
+Using the intake answers and dependency content, fill every generated section in the template.
 
-**Before proceeding:** Scan the assembled document for any remaining `<!-- AI Generated -->` markers. If any exist, fill them now. A document with unfilled markers MUST NOT continue to Step 2.
+- For `.md` templates: sections are marked with `<!-- AI Generated -->`
+- For `.yaml` templates: sections are marked with `# AI Generated`
+
+**Before proceeding:** Scan the assembled document for any remaining unfilled markers. If any exist, fill them now. A document with unfilled markers MUST NOT continue to Step 2.
 
 ---
 
@@ -47,7 +50,14 @@ After each generated section body, insert three annotation lines:
 > **Review focus:** [the single most important question the reviewer should answer before confirming this section]
 ```
 
-Place annotations between the generated content and the `<!-- Human Review Required -->` marker.
+Place annotations between the generated content and the review marker (`<!-- Human Review Required -->` for `.md` files, `# Human Review Required` for `.yaml` files).
+
+For `.yaml` documents, use YAML comment prefix for annotation lines:
+```
+# AI Reasoning: [what inputs and logic produced this content]
+# Assumption: [any inference the human must validate — write "None" if no assumption]
+# Review focus: [the single most important question to answer before confirming]
+```
 
 **Before proceeding:** Verify every section has all three annotation lines. A section with any missing annotation MUST NOT be written to disk.
 
@@ -93,12 +103,18 @@ Tell the user:
 
 Remove the following from the document content:
 
-- All lines matching `> **AI Reasoning:***`
-- All lines matching `> **Assumption:***`
-- All lines matching `> **Review focus:***`
+- All lines matching `> **AI Reasoning:**`
+- All lines matching `> **Assumption:**`
+- All lines matching `> **Review focus:**`
+- All lines matching `# AI Reasoning:`
+- All lines matching `# Assumption:`
+- All lines matching `# Review focus:`
 - All `<!-- AI Generated -->` markers
 - All `<!-- Human Review Required -->` markers
 - All `[ ] Confirmed` lines
+- All `# AI Generated` markers
+- All `# Human Review Required` markers
+- All `# [ ] Confirmed` lines
 
 ---
 
