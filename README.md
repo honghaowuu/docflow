@@ -126,6 +126,8 @@ NO DOCUMENT GENERATION WITHOUT ALL DEPENDENCIES APPROVED
 
 ```
 .
+├── plugin.json         # Plugin manifest (name, version, skill/hook locations)
+├── settings.json       # Default permissions granted when plugin is enabled
 ├── skills/
 │   ├── start/          # Orchestrator
 │   ├── pipeline/       # Shared generate → review → commit pipeline
