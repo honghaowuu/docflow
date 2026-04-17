@@ -172,3 +172,4 @@ Based on user's choice, invoke the document skill and communicate the mode (guid
 - Generate / regenerate `api-implement-logic.md` fast → **REQUIRED SUB-SKILL:** `docflow:api-implement-logic` — tell it: fast mode, skip intake
 - Generate / regenerate `test-spec.md` guided → **REQUIRED SUB-SKILL:** `docflow:test-spec` — tell it: guided mode
 - Generate / regenerate `test-spec.md` fast → **REQUIRED SUB-SKILL:** `docflow:test-spec` — tell it: fast mode, skip intake
+- Repair an outdated document → **REQUIRED SUB-SKILL:** `docflow:repair`
