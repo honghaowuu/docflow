@@ -1,6 +1,6 @@
 # DocFlow
 
-AI-assisted documentation pipeline for Claude Code. DocFlow guides you through generating 8 software design documents in dependency order — from product requirements to test specifications — with structured AI questioning, human review annotations, and git-tracked approval.
+AI-assisted documentation pipeline for Claude Code. DocFlow guides you through generating 8 software design documents in dependency order — from product requirements to test specifications — with structured AI debate, human review annotations, and git-tracked approval.
 
 ---
 
@@ -71,11 +71,25 @@ Claude will show a status table and offer the next available actions.
 
 ## Generating Documents
 
-DocFlow offers two modes for every document (except `prd.md`, which is always guided):
+### PRD — Adversarial Debate
+
+`docflow:prd` runs a multi-phase adversarial debate to produce the PRD:
+
+1. **Intent clarification** — structured dialogue to pin down scope, users, constraints, and success criteria
+2. **Framework design** — custom 4-7 phase debate framework tailored to your topic
+3. **Debate loop** — an Opus proposer and Sonnet reviewer run 2-5 rounds per phase; the host judges convergence using 3-of-5 criteria
+4. **Backtracking validation** — after each phase, prior commitments are checked for contradictions, scope loss, or priority drift
+5. **Synthesis** — all phase consensus documents are combined into `docs/prd.md` and core commitments are extracted to `.docflow/commitments.md`
+
+Session state is persisted to `.docflow/debate/<slug>/` so debates can be paused and resumed.
+
+### Downstream Documents — Two Modes
 
 **Guided mode** — Claude asks candidate-first questions, deriving options from your prior answers and upstream documents. Each question presents a numbered list with one option marked `*(recommended)*`. You confirm, adjust, or pick "Other".
 
 **Fast mode** — Claude reads all approved dependency documents and generates the new document directly, skipping intake. Only available when all dependencies are approved.
+
+Both modes run a **Consistency Check** before generation: if `.docflow/commitments.md` exists, Claude verifies the upstream documents do not contradict any PRD commitment before proceeding.
 
 ---
 
@@ -144,6 +158,11 @@ NO DOCUMENT GENERATION WITHOUT ALL DEPENDENCIES APPROVED
 │   ├── start/              # Entrypoint — triggers the session-start orchestrator
 │   ├── pipeline/           # Shared generate → review → commit pipeline
 │   ├── prd/
+│   │   ├── SKILL.md        # Debate orchestration (Opus proposer + Sonnet reviewer)
+│   │   └── references/     # 11 protocol docs (intent-clarification, framework-design,
+│   │                       #   phase-progression, backtracking-algorithm, proposer-protocol,
+│   │                       #   reviewer-protocol, context-management, session-recovery,
+│   │                       #   prd-template, proposer-decomposition, reviewer-decomposition)
 │   ├── use-cases/
 │   ├── ux-flow/
 │   ├── domain-model/
@@ -156,9 +175,13 @@ NO DOCUMENT GENERATION WITHOUT ALL DEPENDENCIES APPROVED
 │   ├── session-start       # SessionStart hook (detects project, injects context)
 │   └── start-context.md    # Orchestrator instructions injected by the hook
 ├── tests/
-│   └── validate.sh         # Structural validation (99 checks)
+│   └── validate.sh         # Structural validation (120 checks)
 └── .docflow/
-    └── status.yaml         # Per-document approval state (created on init)
+    ├── status.yaml         # Per-document approval state (created on init)
+    ├── commitments.md      # Core commitments extracted from PRD debate
+    ├── intent-brief.md     # Clarified intent from debate Phase 2
+    └── debate/
+        └── <slug>/         # Per-debate workspace (state, phases, output)
 ```
 
 ---
@@ -169,4 +192,4 @@ NO DOCUMENT GENERATION WITHOUT ALL DEPENDENCIES APPROVED
 bash tests/validate.sh
 ```
 
-Checks all 97 structural requirements: file existence, skill frontmatter, Iron Laws, candidate-first pattern, pipeline handoffs, routing, template markers, and hook configuration.
+Checks all 120 structural requirements: file existence, skill frontmatter, Iron Laws, candidate-first pattern, pipeline handoffs, routing, template markers, hook configuration, PRD debate patterns, reference file existence, and downstream consistency check gates.
