@@ -35,6 +35,9 @@ check_file "hooks/start-context.md"
 check_file "skills/start/SKILL.md"
 check_file "skills/pipeline/SKILL.md"
 check_file "skills/prd/SKILL.md"
+for ref in intent-clarification framework-design backtracking-algorithm context-management phase-progression proposer-protocol reviewer-protocol session-recovery prd-template proposer-decomposition reviewer-decomposition; do
+    check_file "skills/prd/references/$ref.md"
+done
 check_file "skills/use-cases/SKILL.md"
 check_file "skills/domain-model/SKILL.md"
 check_file "skills/ux-flow/SKILL.md"
@@ -77,7 +80,9 @@ check_contains "hooks/start-context.md" \
 
 echo ""
 echo "--- Candidate-First Pattern ---"
-check_contains "skills/prd/SKILL.md" "\*(recommended)\*" "prd: has candidate-first recommendations"
+check_contains "skills/prd/SKILL.md" "debate-state" "prd: has debate state management"
+check_contains "skills/prd/SKILL.md" "commitments.md" "prd: extracts commitments"
+check_contains "skills/prd/SKILL.md" "model.*opus\|opus.*model" "prd: dispatches opus proposer"
 check_contains "skills/use-cases/SKILL.md" "\*(recommended)\*" "use-cases: has candidate-first recommendations"
 check_contains "skills/domain-model/SKILL.md" "\*(recommended)\*" "domain-model: has candidate-first recommendations"
 check_contains "skills/ux-flow/SKILL.md" "\*(recommended)\*" "ux-flow: has candidate-first recommendations"
@@ -221,6 +226,12 @@ check_executable "hooks/session-start"
 check_contains "settings.json" "SessionStart" "settings.json: has SessionStart hook registered"
 check_contains "settings.json" "CLAUDE_PLUGIN_ROOT" "settings.json: hook uses \${CLAUDE_PLUGIN_ROOT}"
 check_contains "settings.json" "session-start" "settings.json: hook references session-start script"
+
+echo ""
+echo "--- Consistency Check Gate ---"
+for skill in use-cases ux-flow domain-model ui-spec api-spec api-implement-logic test-spec; do
+    check_contains "skills/$skill/SKILL.md" "commitments.md" "$skill: has consistency check"
+done
 
 echo ""
 echo "=== Results: $PASS passed, $FAIL failed ==="
