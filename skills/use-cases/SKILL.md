@@ -20,6 +20,33 @@ Stop here. Do not proceed without an approved prd.md.
 
 ---
 
+## Consistency Check
+
+**Skip this section if `.docflow/commitments.md` does not exist** — the PRD debate has not been run yet.
+
+If `.docflow/commitments.md` exists:
+
+1. Read `.docflow/commitments.md` in full
+2. Read `docs/prd.md` (approved upstream dependency)
+3. Check whether any commitment is contradicted by the upstream content or the generation context you have gathered
+4. If conflict found, surface to user before proceeding:
+
+> "Before generating use-cases.md, I found a commitment conflict:
+>
+> **{C_ref}**: {commitment text}
+> **Conflict**: {explanation}
+>
+> How would you like to proceed?
+> 1. Regenerate the PRD to resolve the conflict first
+> 2. Override — proceed and document this deviation
+> 3. Cancel — I'll review manually"
+
+Wait for user selection. If Override chosen, proceed and add a deviation note at the end of the generated document.
+
+5. Post-generation: after producing the document but before presenting for review, verify the generated content does not violate any commitment. If a violation is found, flag it explicitly in the review presentation.
+
+---
+
 ## Fast Mode
 
 If the orchestrator indicated fast mode:

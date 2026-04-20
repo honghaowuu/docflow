@@ -20,6 +20,33 @@ Stop here. Do not proceed with unapproved dependencies.
 
 ---
 
+## Consistency Check
+
+**Skip this section if `.docflow/commitments.md` does not exist.**
+
+If `.docflow/commitments.md` exists:
+
+1. Read `.docflow/commitments.md` in full
+2. Read all approved upstream documents: `docs/prd.md`, `docs/use-cases.md`
+3. Check whether any commitment is contradicted by the upstream content
+4. If conflict found, surface to user before proceeding:
+
+> "Before generating domain-model.md, I found a commitment conflict:
+>
+> **{C_ref}**: {commitment text}
+> **Conflict**: {explanation}
+>
+> How would you like to proceed?
+> 1. Regenerate the PRD to resolve the conflict first
+> 2. Override — proceed and document this deviation
+> 3. Cancel — I'll review manually"
+
+Wait for user selection. If Override chosen, proceed and add a deviation note.
+
+5. Post-generation: verify generated content against commitments before presenting for review.
+
+---
+
 ## Fast Mode
 
 If the orchestrator indicated fast mode:
