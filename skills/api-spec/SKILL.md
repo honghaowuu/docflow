@@ -20,6 +20,30 @@ Stop here. Do not proceed with unapproved dependencies.
 
 ---
 
+## Consistency Check
+
+**Skip this section if `.docflow/commitments.md` does not exist.**
+
+If `.docflow/commitments.md` exists:
+
+1. Read `.docflow/commitments.md` in full
+2. Read all approved upstream documents: `docs/use-cases.md`, `docs/domain-model.md`, `docs/ux-flow.md`
+3. Check whether any commitment is contradicted by upstream content
+4. If conflict found:
+
+> "Before generating api-spec.yaml, I found a commitment conflict:
+>
+> **{C_ref}**: {commitment text}
+> **Conflict**: {explanation}
+>
+> 1. Regenerate the PRD to resolve the conflict first
+> 2. Override — proceed and document this deviation
+> 3. Cancel — I'll review manually"
+
+5. Post-generation: verify generated content against commitments.
+
+---
+
 ## Fast Mode
 
 If the orchestrator indicated fast mode:
