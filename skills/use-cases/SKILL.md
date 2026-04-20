@@ -75,6 +75,8 @@ Read `docs/prd.md` before asking any question. Derive candidates from the PRD th
 
 Ask one question per message. Present each question as numbered options with one marked `*(recommended)*` and a final option `[N]. Other — describe your own`.
 
+**Use case references:** Whenever referencing a use case by ID, always include a one-sentence goal summary inline — e.g., `UC7 (User uploads a document to a project)` — so the user never needs to look it up.
+
 **Opening question — derive candidate actors from prd.md target users:**
 > "Based on the PRD, I've identified these actors:
 >
