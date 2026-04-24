@@ -73,7 +73,7 @@ Claude will show a status table and offer the next available actions.
 
 ### PRD — Adversarial Debate
 
-`docflow:prd` runs a multi-phase adversarial debate to produce the PRD:
+`docflow:prd` is based on [prd-debate](https://github.com/betseyliu/prd-debate) by Betsey Liu. It runs a multi-phase adversarial debate to produce the PRD:
 
 1. **Intent clarification** — structured dialogue to pin down scope, users, constraints, and success criteria
 2. **Framework design** — custom 4-7 phase debate framework tailored to your topic
@@ -193,3 +193,9 @@ bash tests/validate.sh
 ```
 
 Checks all 120 structural requirements: file existence, skill frontmatter, Iron Laws, candidate-first pattern, pipeline handoffs, routing, template markers, hook configuration, PRD debate patterns, reference file existence, and downstream consistency check gates.
+
+---
+
+## Acknowledgments
+
+The PRD adversarial debate mechanism (`docflow:prd`) is based on [prd-debate](https://github.com/betseyliu/prd-debate) by Betsey Liu.
